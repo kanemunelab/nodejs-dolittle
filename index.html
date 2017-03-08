@@ -1,6 +1,7 @@
 <html>
 <meta charset="utf-8">
   <head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="./js/util/jquery-2.1.0.js"></script>
     <script src="./js/transpiler/ExpressionParser2.js"></script>
     <script src="./js/transpiler/parser.js"></script>
@@ -9,8 +10,10 @@
     <script src="./js/editor/ace.js"></script>
   </head>
   <body>
-    <div id="editor" style="height:80%;width:60%;"></div>
-    <button id="transpile">transpile</textarea>
+    <div id="editor" class="editor"></div>
+    <button id="transpile">transpile</button>
+    <div id="exe_window" class="exe_window"></div>
+
     <script>
       var editor=ace.edit("editor");
       $("#transpile").click(function(){
@@ -18,7 +21,6 @@
 
         console.log(MinimalParser.parse(prog));
       });
-
     </script>
   </body>
 </html>

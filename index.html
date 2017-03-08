@@ -1,0 +1,24 @@
+<html>
+<meta charset="utf-8">
+  <head>
+    <script src="./js/util/jquery-2.1.0.js"></script>
+    <script src="./js/transpiler/ExpressionParser2.js"></script>
+    <script src="./js/transpiler/parser.js"></script>
+    <script src="./js/transpiler/context.js"></script>
+    <script src="./js/transpiler/minimal.js"></script>
+    <script src="./js/editor/ace.js"></script>
+  </head>
+  <body>
+    <div id="editor" style="height:80%;width:60%;"></div>
+    <button id="transpile">transpile</textarea>
+    <script>
+      var editor=ace.edit("editor");
+      $("#transpile").click(function(){
+        var prog=editor.getSession().getValue();
+
+        console.log(MinimalParser.parse(prog));
+      });
+
+    </script>
+  </body>
+</html>

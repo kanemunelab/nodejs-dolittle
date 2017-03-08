@@ -1,0 +1,7 @@
+{
+  "name": "nodedolittle",
+  "main": "index.html",
+  "window": {
+    "toolbar": true
+  }
+}

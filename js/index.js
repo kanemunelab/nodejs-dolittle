@@ -1,6 +1,3 @@
-var editor=ace.edit("editor");
-var fs=require('fs');
-
 var insert_char=function(str) {
   var strOriginal = document.form.prog.value;
   var posCursole = document.form.prog.selectionStart;
@@ -9,9 +6,15 @@ var insert_char=function(str) {
   document.form.prog.value = leftPart + str + rightPart;
 }
 $(function () {
+  fs.fileListAsync(function(err,files){
+    if(err)throw err;
+    files.map(function(k){
+      var option=$("<option val=\""+k+"\">"+k+"</option>");
+      option.appendTo($("#files"));
+    });
+  });
   $("#run").click(function(){
     var src=editor.getSession().getValue();
-    //localStorage.setItem(('sample'),src);
     var dtlNode=MinimalParser.parseAsNode(src);
     /*if (src.match(/RUN_AT_SERVER/)) {
         var vmc=MinimalParser.node2vm(dtlNode);
@@ -30,7 +33,7 @@ $(function () {
         return;
     }*/
     var dtl=MinimalParser.node2js(dtlNode);
-    fs.writeFile("./js/runtime/run/run.js",dtl);
+    fs.writeRunFile(dtl);
     //dtl=js_beautify(dtl);
     console.log(dtl);
     window.open("./run.html");
@@ -41,7 +44,13 @@ $(function () {
     if(!(filename+"")["length"])return;
     if(!(filename+"").match(/\.[a-zA-Z]+$/))filename+=".dtl";
     var src=editor.getSession().getValue();
-    fs.writeFile("./dtl/"+filename,src);
+    fs.writeFile(filename,src);
+  });
+  $("#load").click(function(){
+    var filename=$("#files").val();
+    if(filename=="___nofile___")return;
+    var src=fs.readFile(filename);
+    editor.setValue(src);
   });
   $("#samples").change(function () {
     $("#prog").val( $("#prog_"+this.value).val());

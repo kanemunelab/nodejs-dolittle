@@ -28,6 +28,26 @@
     <button id="transpile">transpile</button>
     <script>
       var editor=ace.edit("editor");
+      var fs=require('fs');
+    </script>
+
+    <script>
+      /*var prog=localStorage.getItem('sample');
+      document.form.prog.value=((prog)?prog:"");*/
+      var iframe=$("<iframe>");
+      iframe.attr("src","././run.html");
+      iframe.css("position","absolute").css("left","450px").css("top","70px");
+      iframe.css("width","660px").css("height","500px");
+      iframe.appendTo("body");
+      /*var iframe=document.createElement("iframe");
+      iframe.style.cssText="position:absolute;left:450px;top:70px;width:660px;height:500px";
+      */var iframe_document;
+      iframe.on("load",function () {
+          //iframe_document = iframe.contentWindow.document;
+          console.log("Ready", iframe_document);
+      });
+      //document.body.appendChild(iframe);
+      //iframe_document.src="http://oecu-edu.sakura.ne.jp/honda/executer.html";
     </script>
 
     <script>
@@ -61,9 +81,10 @@
         			return;
     			}*/
     			var dtl=MinimalParser.node2js(dtlNode);
+          fs.writefile("./js/runtime/run/run.js");
     		  //dtl=js_beautify(dtl);
     			console.log(dtl);
-    			(iframe.contentWindow.timer_stopper)?iframe.contentWindow.timer_stopper():null;
+    			/*(iframe.contentWindow.timer_stopper)?iframe.contentWindow.timer_stopper():null;
     			iframe_document.open();
     			iframe_document.writeln("<html><body>");
     			iframe_document.writeln("<script src=\"./js/util/jquery-2.1.0.js\"><\/script>");
@@ -72,7 +93,7 @@
     			iframe_document.writeln("<script charset='utf-8' src=\"./dtl/lib.js\"><\/script>");
     			iframe_document.writeln("<script charset='utf-8'>try{(function(){"+dtl+"})();}catch(e){console.log(e.stack);alert(\"エラーが発生しました\\n\"+e);}<\/script>");
     			iframe_document.writeln("</body></html>");
-    			iframe_document.close();
+    			iframe_document.close();*/
     			//iframe.contentWindow.executer(MinimalParser.parse($("#prog").val()));
     			//(new Function(MinimalParser.parse($("#prog").val())))();
     			//page.document.close();
@@ -259,7 +280,7 @@
 
     <script>
       /*var prog=localStorage.getItem('sample');
-      document.form.prog.value=((prog)?prog:"");*/
+      document.form.prog.value=((prog)?prog:"");*//*
       var iframe=document.createElement("iframe");
       iframe.style.cssText="position:absolute;left:450px;top:70px;width:660px;height:500px";
       var iframe_document;
@@ -268,7 +289,7 @@
           console.log("Ready", iframe_document);
       });
       document.body.appendChild(iframe);
-      //iframe_document.src="http://oecu-edu.sakura.ne.jp/honda/executer.html";
+      //iframe_document.src="http://oecu-edu.sakura.ne.jp/honda/executer.html";*/
     </script>
   </body>
 </html>

@@ -23,98 +23,10 @@
       <option value="sv10">(server)掲示板</option>
     </select>
 
-    <button id=run style="font-size:110%">実行</button><br>
+    <button id=run style="font-size:110%">実行</button>
+    <button id=save style="font-size:110%">保存</button><br>
     <div id="editor" class="editor"></div>
-    <script>
-      var editor=ace.edit("editor");
-      var fs=require('fs');
-      /*var prog=localStorage.getItem('sample');
-      document.form.prog.value=((prog)?prog:"");*/
-      /*var iframe=$("<iframe>");
-      iframe.attr("src","././run.html");
-      iframe.css("position","absolute").css("left","450px").css("top","70px");
-      iframe.css("width","660px").css("height","500px");
-      iframe.appendTo("body");*/
-      /*var iframe=document.createElement("iframe");
-      iframe.style.cssText="position:absolute;left:450px;top:70px;width:660px;height:500px";
-      var iframe_document;
-      iframe.on("load",function () {
-          //iframe_document = iframe.contentWindow.document;
-          console.log("Ready", iframe_document);
-      });*/
-      //document.body.appendChild(iframe);
-      //iframe_document.src="http://oecu-edu.sakura.ne.jp/honda/executer.html";
-
-
-    	var insert_char=function(str) {
-    		var strOriginal = document.form.prog.value;
-    		var posCursole = document.form.prog.selectionStart;
-    		var leftPart = strOriginal.substr(0, posCursole);
-    		var rightPart = strOriginal.substr(posCursole, strOriginal.length);
-    		document.form.prog.value = leftPart + str + rightPart;
-    	}
-    	$(function () {
-    		$("#run").click(function(){
-          var src=editor.getSession().getValue();
-    			localStorage.setItem(('sample'),src);
-    			var dtlNode=MinimalParser.parseAsNode(src);
-    			/*if (src.match(/RUN_AT_SERVER/)) {
-    	    		var vmc=MinimalParser.node2vm(dtlNode);
-    	    		var vmcj=JSON.stringify(vmc);
-        			console.log("VM Code", vmcj);
-        			var svurl="../../php/dtlfs.php";
-        			$.post(svurl,{script: vmcj}).then(function (res){
-        			    console.log(res);
-    	    			(iframe.contentWindow.timer_stopper)?iframe.contentWindow.timer_stopper():null;
-            			iframe_document.open();
-    		        	iframe_document.writeln("<html><body>"+res+"</body></html>");
-        			}).fail(function (res) {
-        			    console.log("ERR",res.responseText);
-        			    alert(res.responseText);
-        			});
-        			return;
-    			}*/
-    			var dtl=MinimalParser.node2js(dtlNode);
-          //console.log(fs.writefile);
-          fs.writeFile("./js/runtime/run/run.js",dtl);
-    		  //dtl=js_beautify(dtl);
-    			console.log(dtl);
-          window.open("./run.html");
-    			/*(iframe.contentWindow.timer_stopper)?iframe.contentWindow.timer_stopper():null;
-    			iframe_document.open();
-    			iframe_document.writeln("<html><body>");
-    			iframe_document.writeln("<script src=\"./js/util/jquery-2.1.0.js\"><\/script>");
-    			iframe_document.writeln("<canvas id=\"canvas\" width=\"640\" height=\"480\"><\/canvas>");
-          iframe_document.writeln("<script charset='utf-8' src=\"./dtl/mt.js\"><\/script>");
-    			iframe_document.writeln("<script charset='utf-8' src=\"./dtl/lib.js\"><\/script>");
-    			iframe_document.writeln("<script charset='utf-8'>try{(function(){"+dtl+"})();}catch(e){console.log(e.stack);alert(\"エラーが発生しました\\n\"+e);}<\/script>");
-    			iframe_document.writeln("</body></html>");
-    			iframe_document.close();*/
-    			//iframe.contentWindow.executer(MinimalParser.parse($("#prog").val()));
-    			//(new Function(MinimalParser.parse($("#prog").val())))();
-    			//page.document.close();
-    		});
-    		$("#samples").change(function () {
-    			$("#prog").val( $("#prog_"+this.value).val());
-    		});
-    		if (navigator.userAgent.indexOf('iPhone') > 0 || navigator.userAgent.indexOf('iPad') > 0 || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
-    			$("#sb").click(function() {insert_char("「」");});
-    			$("#paren").click(function() {insert_char("（）");});
-    			$("#exc").click(function() {insert_char("！");});
-    			$("#ques").click(function() {insert_char("？");});
-    			$("#maru").click(function() {insert_char("。");});
-    			$("#stick").click(function() {insert_char("｜｜");});
-    			$("#equ").click(function() {insert_char("＝");});
-    			$("#add").click(function() {insert_char("＋");});
-    			$("#sub").click(function() {insert_char("−");});
-    			$("#mul").click(function() {insert_char("×");});
-    			$("#div").click(function() {insert_char("÷");});
-    			$("#dq").click(function() {insert_char("\”\”");});
-    			$("#colon").click(function() {insert_char(":");});
-    		}
-    	});
-
-    </script>
+    <script src="./js/index.js"></script>
 
     <script>
     if (navigator.userAgent.indexOf('iPhone') > 0 || navigator.userAgent.indexOf('iPad') > 0 || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {

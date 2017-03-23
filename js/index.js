@@ -5,17 +5,24 @@ var insert_char=function(str) {
   var rightPart = strOriginal.substr(posCursole, strOriginal.length);
   document.form.prog.value = leftPart + str + rightPart;
 }
+//TODO ファイル保存時、$("#files")に追加
 $(function () {
   fs.fileListAsync(function(err,files){
     if(err)throw err;
     files.map(function(k){
-      var option=$("<option val=\""+k+"\">"+k+"</option>");
+      if(!k.match(/\.dtl$/))return;
+      var option=$("<option value=\""+k+"\">"+k+"</option>");
       option.appendTo($("#files"));
     });
   });
   $("#run").click(function(){
     var src=editor.getSession().getValue();
-    var dtlNode=MinimalParser.parseAsNode(src);
+    try{
+      var dtlNode=MinimalParser.parseAsNode(src);
+    }catch(e){
+      alert(e);
+      return;
+    }
     /*if (src.match(/RUN_AT_SERVER/)) {
         var vmc=MinimalParser.node2vm(dtlNode);
         var vmcj=JSON.stringify(vmc);
@@ -36,15 +43,31 @@ $(function () {
     fs.writeRunFile(dtl);
     //dtl=js_beautify(dtl);
     console.log(dtl);
-    window.open("./run.html");
 
+    window.open("./run.html");
   });
   $("#save").click(function(){
+    var dtl=editor.getSession().getValue();
+    var dtlNode,errFlag=false;
+    try{
+      dtlNode=MinimalParser.parseAsNode(dtl);
+    }catch(e){
+      errFlag=true;
+      if(!confirm("プログラムに誤りがあります。\n保存しますか？"))return;
+    }
     var filename=prompt("ファイル名を入力してください");
     if(!(filename+"")["length"])return;
     if(!(filename+"").match(/\.[a-zA-Z]+$/))filename+=".dtl";
-    var src=editor.getSession().getValue();
-    fs.writeFile(filename,src);
+    fs.writeFile(filename,dtl);
+    //var list=$("#files").childen();
+    //list.map(function(k){console.log(k);});
+    if(!errFlag){
+      var js=MinimalParser.node2js(dtlNode);
+      fs.writeFile(filename+".js",js);
+    }
+    var filesList=$("#files").children();
+    var filenameList=[];
+
   });
   $("#load").click(function(){
     var filename=$("#files").val();
@@ -52,9 +75,9 @@ $(function () {
     var src=fs.readFile(filename);
     editor.setValue(src);
   });
-  $("#samples").change(function () {
+  /*$("#samples").change(function () {
     $("#prog").val( $("#prog_"+this.value).val());
-  });
+  });*/
   if (navigator.userAgent.indexOf('iPhone') > 0 || navigator.userAgent.indexOf('iPad') > 0 || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
     $("#sb").click(function() {insert_char("「」");});
     $("#paren").click(function() {insert_char("（）");});

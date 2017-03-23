@@ -322,7 +322,7 @@ Object.defineProperty(Array,"create",{
 });
 Object.defineProperty(Array.prototype,"get",{
 	enumerable:false,configurable:true,
-	value:function(index){return (this[index-1])?(this[index-1]):(null);}
+	value:function(index){return this[index-1];}
 });
 Object.defineProperty(Array.prototype,"set",{
 	enumerable:false,configurable:true,
@@ -613,17 +613,19 @@ function dtlbind(bound, f) {
     f.bound=bound;
     return f;
 };
+
 window.dtlbind=dtlbind;
 root._while=root.create();
-root._while.initialize=function(f){
-	this.s=f;
-};
-root._while.execute=function(f){
-	var res=undefined;
-	while(this.s()){
-		res=f.execute();
-	}
-	return res;
+root._while.initialize=function(c){
+  var cond=c;
+  this._while.execute=function(f){
+    var func=f;
+  	var res=undefined;
+  	while(cond.execute()){
+  		res=func.execute();
+  	}
+  	return res;
+  };
 };
 
 root._true=root.create();

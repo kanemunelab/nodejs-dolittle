@@ -1,4 +1,2 @@
-(function(){return this['module']['require']("hoge",dtlbind(this,function(){
-var self=this;var 自分=self;
-return }));
+(function(){return this['label']['create']((1));
 }).checkerror().apply(root,[]);

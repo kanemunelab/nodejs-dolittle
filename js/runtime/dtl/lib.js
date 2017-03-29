@@ -237,8 +237,18 @@ root.or=or;
 
 root.system=root.create().extend({
 	localize: localize,
+  use:function(filename){
+    $("<script src=\"/dtl/"+filename+".dtl.js\"></script>").appendTo("head");
+  },
 	new:function(obj){
-		return new(Function.prototype.bind.apply(obj,arguments));
+    var args=Array.prototype.slice.call(arguments);
+    args.shift();
+    //console.log(args);
+    var creater=function(args){
+      return obj.apply(this,args);
+    };
+    creater.prototype=obj.prototype;
+		return new creater(args);
 	},
 	sleep:function(time){
 		var start=new Date().getTime();
@@ -616,10 +626,8 @@ function dtlbind(bound, f) {
 
 window.dtlbind=dtlbind;
 root._while=root.create();
-root._while.initialize=function(c){
-  var cond=c;
-  this._while.execute=function(f){
-    var func=f;
+root._while.initialize=function(cond){
+  this._while.execute=function(func){
   	var res=undefined;
   	while(cond.execute()){
   		res=func.execute();

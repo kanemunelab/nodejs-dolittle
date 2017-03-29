@@ -21,4 +21,14 @@ $(function(){
       editor.setFontSize(editor.getFontSize()-1);
     }
   });
+  /*editor.commands.addCommand({
+    name:"paste",
+    bindKey:{
+      win:"Ctrl-V",
+      mac:"Command-V",
+    },
+    exec:function(editor){
+      editor.focus();
+    }
+  });*/
 });

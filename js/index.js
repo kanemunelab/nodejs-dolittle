@@ -1,3 +1,5 @@
+var exe_window;
+
 var insert_char=function(str) {
   var strOriginal = document.form.prog.value;
   var posCursole = document.form.prog.selectionStart;
@@ -44,7 +46,8 @@ $(function () {
     //dtl=js_beautify(dtl);
     console.log(dtl);
 
-    window.open("./run.html");
+    if(exe_window)exe_window.close();
+    exe_window=window.open("./run.html");
   });
   $("#save").click(function(){
     var dtl=editor.getSession().getValue();

@@ -1,4 +1,5 @@
 $(function(){
+  //$("<div id=\"editor\" class=\"editor\" style=\"z-index:0;\"></div>").appendTo($("body"));
   editor=ace.edit("editor");
   editor.setFontSize(16);
   editor.commands.addCommand({

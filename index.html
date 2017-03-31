@@ -1,45 +1,47 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
 
   <body>
-    <script src="./js/util/jquery-2.1.0.js"></script>
-    <script src="./js/transpiler/ExpressionParser2.js"></script>
-    <script src="./js/transpiler/parser.js"></script>
-    <script src="./js/transpiler/context.js"></script>
-    <script src="./js/transpiler/minimal.js"></script>
-    <script src="./js/editor/ace/ace.js"></script>
-    <script src="./js/editor/editor.js"></script>
-    <script src="./js/fs/fs.js"></script>
+    <script charset="utf-8" src="./js/util/jquery-2.1.0.js"></script>
+    <script charset="utf-8" src="./js/util/bootstrap.js"></script>
+    <script charset="utf-8" src="./js/transpiler/ExpressionParser2.js"></script>
+    <script charset="utf-8" src="./js/transpiler/parser.js"></script>
+    <script charset="utf-8" src="./js/transpiler/context.js"></script>
+    <script charset="utf-8" src="./js/transpiler/minimal.js"></script>
+    <script charset="utf-8" src="./js/editor/ace/ace.js"></script>
+    <script charset="utf-8" src="./js/editor/editor.js"></script>
+    <script charset="utf-8" src="./js/ide/fileLoad.js"></script>
+    <script charset="utf-8" src="./js/fs/fs.js"></script>
+
     <select id=files name=samples style="font-size:110%">
       <option value="___nofile___">---</option>
     </select>
-    <button id=load style="font-size:110%">読み込み</button>
-    <button id=save style="font-size:110%">保存</button>
-    <button id=run style="font-size:110%">実行</button><br>
-    <div id="editor" class="editor"></div>
-    <script src="./js/index.js"></script>
 
-    <script>
-    if (navigator.userAgent.indexOf('iPhone') > 0 || navigator.userAgent.indexOf('iPad') > 0 || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
-    	$("<button id=maru>。</button>").appendTo("body");
-    	$("<button id=equ>＝</button>").appendTo("body");
-    	$("<button id=exc>！</button>").appendTo("body");
-    	$("<button id=add>＋</button>").appendTo("body");
-    	$("<button id=sb>「」</button>").appendTo("body");
-    	$("<button id=paren>（）</button>").appendTo("body");
-    	$("<button id=dq>\”\”</button>").appendTo("body");
-    	$("<button id=colon>:</button>").appendTo("body");
-    	$("<button id=sub>−</button>").appendTo("body");
-    	$("<button id=div>÷</button>").appendTo("body");
-    	$("<button id=mul>×</button>").appendTo("body");
-    	$("<button id=ques>？</button>").appendTo("body");
-    	$("<button id=stick>｜｜</button>").appendTo("body");
-    	$("<br>").appendTo("body");
-    }
+    <button id=load class="btn btn-default">読み込み</button>
+    <button id=save class="btn btn-default">保存</button>
+    <button id=run class="btn btn-default">実行</button><br>
 
-    </script>
+    <div id="editor" class="editor" style="z-index:0;"></div>
+
+    <div id="saveWindowBg" class="saveWindowBg">
+      <div id="saveWindow" class="saveWindow well">
+        読み込むプログラムを選択してください。
+
+        <div class="container" style="margin-top:5px;">
+          <table id="fileTable" class="table table-bordered fileTable">
+            <thead id="fileListColumnLabels">
+            </thead>
+            <tbody id="fileList" class="fileList">
+            </tbody>
+          </table>
+        </div>
+    </div>
+    </div>
+
+    <script charset="utf-8" src="./js/index.js"></script>
   </body>
 </html>

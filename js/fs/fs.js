@@ -9,10 +9,10 @@ var fs=(function(){
   this.writeRunFile=function(src){
     fs.writeFile("./js/runtime/run/run.js",src);
   };
-  this.getFileList=function(){
+  this.getProgDirFileListSync=function(){
     return fs.readdirSync("./dtl/");
   };
-  this.fileListAsync=function(func){
+  this.progDirFileListAsync=function(func){
     fs.readdir("./dtl/",func);
   };
   return this;

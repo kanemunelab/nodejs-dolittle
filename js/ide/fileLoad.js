@@ -1,16 +1,7 @@
 $(function(){
-  /*var saveWindowBg=$("<div id=\"saveWindowBg\" class=\"saveWindowBg\"></div>");
-  var saveWindow=$("<div id=\"saveWindow\" class=\"saveWindow well\"></div>").appendTo(saveWindowBg);
-  var container=$("<div class=\"container\"></div").appendTo(saveWindow);
-  var fileTable=$("<table id=\"fileTable\"></table>").appendTo(container);
-  var fileListColmunLabels=$("<thead id=\"fileListColmunLabels\"></thead>").appendTo(fileTable);
-  var fileList=$("<tbody id=\"fileList\"></tbody>").appendTo(fileTable);*/
-  //saveWindowBg.appendTo($("body"));
+  var fileList=$("#fileTable tbody");
 
-  var fileList=$("#fileList");
-  var fileListTr=$("#fileList tr");
-
-  $("#fileListColumnLabels").append($("<tr class=\"row\"><th class=\"col-xs-6\">ファイル名</th><th class=\"col-xs-6\">更新日時</th></tr>"));
+  $("#fileTable thead").append($("<tr class=\"row\"><th class=\"col-xs-6\">ファイル名</th><th class=\"col-xs-6\">更新日時</th></tr>"));
 
   $("#load").click(function(){
     $("#saveWindowBg").show();
@@ -37,7 +28,7 @@ $(function(){
     var tr=$("<tr class=\"row\"></tr>");
     tr.append($("<td class=\"col-xs-6\">"+filename+"</td>"));
     tr.append($("<td class=\"col-xs-6\">"+timestamp+"</td>"));
-    tr.appendTo(fileList);
+    tr.appendTo($("#fileTable tbody"));
     setDefault(tr);
     setClick(tr);
   };
@@ -61,7 +52,7 @@ $(function(){
 
   function setClick(file){
     file.click(function(){
-      setDefault($("#fileList tr"));
+      setDefault($("#fileTable tbody tr"));
       $(this).css("background-color","yellow");
       $(this).mouseover(function(){
         $(this).css("background-color","yellow") .css("cursor","pointer")

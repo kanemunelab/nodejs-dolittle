@@ -4,6 +4,7 @@ $(function(){
   $("#fileTable thead").append($("<tr class=\"row\"><th class=\"col-xs-6\">ファイル名</th><th class=\"col-xs-6\">更新日時</th></tr>"));
 
   $("#load").click(function(){
+    $("#fileTable tbody tr").remove();
     $("#saveWindowBg").show();
     fs.progDirFileListAsync(function(err,files){
       if(err)throw err;
@@ -19,8 +20,14 @@ $(function(){
     }.bind(this));
     //addToFileList({"filename":"hoge.dtl","timestamp":"---"});
     return false;
-
   });
+  $("#loadSelectBtn").click(function(){
+    var filename=findSelectFileName();
+    if((filename+"").length<1)return;
+    var src=fs.readFile(filename);
+    editor.setValue(src);
+    $("#saveWindowBg").hide();
+  }.bind(this));
 
   var addToFileList =function(obj){
     var filename=obj['filename'];
@@ -61,5 +68,13 @@ $(function(){
         $(this).css("background-color","yellow").css("cursor","normal")
       });
     });
+  }
+  function findSelectFileName(){
+    var res;
+    $("#fileTable tbody").children("tr").map(function(k,v){
+      if($(v).css("background-color")=="rgb(255, 255, 0)")
+      res=$($(v).children("td")[0]).text();
+    });
+    return res;
   }
 });

@@ -17,10 +17,6 @@
     <script charset="utf-8" src="./js/ide/fileLoad.js"></script>
     <script charset="utf-8" src="./js/fs/fs.js"></script>
 
-    <select id=files name=samples style="font-size:110%">
-      <option value="___nofile___">---</option>
-    </select>
-
     <button id=load class="btn btn-default">読み込み</button>
     <button id=save class="btn btn-default">保存</button>
     <button id=run class="btn btn-default">実行</button><br>
@@ -29,14 +25,20 @@
 
     <div id="saveWindowBg" class="saveWindowBg">
       <div id="saveWindow" class="saveWindow well">
-        読み込むプログラムを選択してください。
+        読み込むファイルを選択してください。
         <div class="container">
           <table id="fileTable" class="table table-bordered fileTable">
             <thead></thead>
             <tbody></tbody>
           </table>
         </div>
-        <button id="loadSend" class="btn btn-default">読み込み</button>
+        <button id="loadSelectBtn" class="btn btn-default loadSelectBtn">読み込み</button>
+        <!--<div class="container">
+          <form id="loadFileForm" class="form-inline loadFileForm">
+            <div class="form-group"><input type="text" class="form-control"></input></div>
+            <button class="btn btn-default">読み込み</button>
+          </form>
+        </div>-->
       </div>
     </div>
 

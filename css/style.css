@@ -25,7 +25,7 @@
   right:0;
   bottom:0;
   left:0;
-  min-width: 320px;
+  min-width: 380px;
   min-height: 240px;
 
   width:80%;
@@ -42,7 +42,7 @@
   overflow-y: scroll;
 }
 .fileTable{
-  height:70%;
+  height:calc(100% - 6.3em);
   width:80%;
   left:0;
   right:0;
@@ -50,7 +50,8 @@
   position:absolute;
 }
 
-.loadSend{
+.loadSelectBtn{
   position:absolute;
-  bottom:2em;
+  bottom:0.5em;
+  right:10%;
 }

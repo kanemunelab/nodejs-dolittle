@@ -55,3 +55,7 @@
   bottom:0.5em;
   right:10%;
 }
+
+::selection {
+  background: transparent;
+}

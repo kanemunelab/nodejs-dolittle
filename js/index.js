@@ -11,6 +11,7 @@ $(function () {
       return;
     }
     var dtl=MinimalParser.node2js(dtlNode);
+    //dtl="(new Thread(function(){"+dtl+"}.bind(window))).once();"
     fs.writeRunFile(dtl);
     //dtl=js_beautify(dtl);
     console.log(dtl);

@@ -364,7 +364,7 @@ Object.defineProperty(Array.prototype,"each",{
 	value:function(func){
 		var res=undefined;
 		for(var i=0;i<this.length;i++){
-			res=func.execute(this[i]);
+			res=func.execute(this[i],i);
 		}
 		return res;
 	},
@@ -459,7 +459,7 @@ String.prototype.mul=function (s) {return this.toNumber()*(s+"").toNumber();};
 String.prototype.div=function (s) {return this.toNumber()/(s+"").toNumber();};
 String.prototype.mod=function (s) {return this.toNumber()%(s+"").toNumber();};
 var substr1=function(param){return this.substring(param-1);};
-var substr2=function(param1,param2){return this.substring(param1-1,param2);}
+var substr2=function(param1,param2){return this.substring(param1-1,param1-1+param2);}
 
 //Booleanオブジェクト
 Boolean.prototype.then=function(){return (this==true)?root._true:root._false;};
